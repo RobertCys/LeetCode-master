@@ -1,0 +1,27 @@
+class Solution {
+public:
+    int search(vector<int>& nums, int target) {
+        int upper_index = nums.size() - 1;
+        int lower_index = 0;
+        int mid_index = (upper_index + lower_index) / 2;//定义上界、下界与中间点。
+        do{
+            if(target == nums[mid_index])
+                return mid_index;
+            else if(target == nums[lower_index])
+                return lower_index;
+            else if(target == nums[upper_index])
+                return upper_index;
+            else{
+                if(target > nums[mid_index]){
+                    lower_index = mid_index;
+                    mid_index = (lower_index + upper_index) / 2;
+                }
+                else{
+                    upper_index = mid_index;
+                    mid_index = (lower_index + upper_index) / 2;
+                }
+            }
+        }while(mid_index != upper_index && mid_index != lower_index);//使用do while结构，执行
+        return -1;
+    }
+};
