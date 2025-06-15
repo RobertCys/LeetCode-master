@@ -1,0 +1,28 @@
+#include <iostream>
+#include <vector>
+#include <utility> 
+using namespace std;
+
+int main()
+{
+    int size;
+    vector<pair<int, int>> scope;
+    cin >> size;
+    vector<int> arrayIn(size, 0);
+    for (int i = 0; i < size; i++)
+    {
+        int val;
+        cin >> val;
+        arrayIn[i] = val;
+    }
+    int upper, lower;
+    while (cin >> lower >> upper)
+    {
+        int sum = 0;
+        for (int i = lower; i <= upper; i++)
+        {
+            sum += arrayIn[i];
+        }
+        cout << sum << endl;
+    }
+}//前缀和，这种做法是错误的，当输入量大的时候很难处理过来，应该舍弃一点空间复杂度，降低时间复杂度
