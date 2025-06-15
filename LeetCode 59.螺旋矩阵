@@ -1,0 +1,21 @@
+class Solution {
+public:
+    vector<vector<int>> generateMatrix(int n) {
+        vector<vector<int>> result(n,vector<int>(n, 0));
+        vector<pair<int,int>> directions = {{0,1},{1,0},{0,-1},{-1,0}};
+        int index_1 = 0, index_2 = 0, index_d = 0;
+        for(int i = 1; i <= n * n; i++){
+            result[index_1][index_2] = i;
+            int nextindex_1 = index_1 + directions[index_d].first;
+            int nextindex_2 = index_2 + directions[index_d].second;
+            if(nextindex_1 >= n || nextindex_1 < 0 || nextindex_2 >= n|| nextindex_2 < 0
+            ||result[nextindex_1][nextindex_2] != 0){
+                index_d = (index_d + 1) % 4;
+            }
+            index_1 = index_1 + directions[index_d].first;
+            index_2 = index_2 + directions[index_d].second;
+        }
+        return result;
+    }
+};
+//几个重要的点，一个是vector的初始化，vector的初始化是会将所有元素默认置为0，pair得用first，second取值。
