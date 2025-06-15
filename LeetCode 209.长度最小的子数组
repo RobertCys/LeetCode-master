@@ -1,0 +1,28 @@
+class Solution {
+public:
+    int minSubArrayLen(int target, vector<int>& nums) {//用一个双指针，类似于滑动窗口的形式，使得窗口中的元素之和能够大于target，如果大于就将后面一个指针向前一点，如果小于就将后面一个指针向后一点。
+        if(nums.empty())
+            return 0;
+        int result = 0;
+        int p1 = 0, p2 = 0;
+        int subArraySum = nums[0];
+        while(p1 < nums.size() && p2 < nums.size()){
+            if(subArraySum >= target){
+                if(result == 0 || p2 - p1 + 1 < result)
+                    result = p2 - p1 + 1;
+                if(result == 1)
+                    return result;
+                else if(result > 1){
+                    subArraySum -= nums[p1++];
+                }
+            }
+            else if(subArraySum < target && p2 < nums.size()){//这里在判断的时候第一次写出错了，一开始是p2 < nums.size() - 1使其无法跳出循环。
+                if(p2 < nums.size() - 1)
+                    subArraySum += nums[++p2];
+                else
+                    break;
+            }
+        }
+        return result;
+    }
+};
